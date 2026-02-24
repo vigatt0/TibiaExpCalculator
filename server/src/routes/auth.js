@@ -1,9 +1,19 @@
 const { Router } = require('express');
 const { body } = require('express-validator');
+const rateLimit = require('express-rate-limit');
 const { register, login, me } = require('../controllers/authController');
 const auth = require('../middleware/auth');
 
 const router = Router();
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  message: { error: 'Too many requests, please try again later.' },
+});
+
+router.use(authLimiter);
+
 
 router.post(
   '/register',

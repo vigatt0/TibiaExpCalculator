@@ -1,11 +1,19 @@
 const { Router } = require('express');
 const { body } = require('express-validator');
+const rateLimit = require('express-rate-limit');
 const auth = require('../middleware/auth');
 const { createGoal, getGoals, deleteGoal } = require('../controllers/goalController');
 
 const router = Router();
 
+const goalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: { error: 'Too many requests, please try again later.' },
+});
+
 router.use(auth);
+router.use(goalLimiter);
 
 router.post(
   '/',

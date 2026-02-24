@@ -58,7 +58,7 @@ function copyAllTransfers() {
 
 <template>
   <div class="max-w-4xl mx-auto">
-    <h1 class="text-3xl font-bold text-center mb-2">⚔️ Army/Party Hunt Session</h1>
+    <h1 class="text-3xl font-bold text-center mb-2">⚔️ Party Hunt Session</h1>
     <p class="text-gray-400 text-center mb-8">Analyze your hunt logs and split profit</p>
 
     <div class="bg-gray-800 rounded-lg p-6 mb-6">
@@ -105,7 +105,7 @@ function copyAllTransfers() {
         </div>
 
         <div class="mt-6">
-            <BaseButton @click="calculateSession">Analyze Party Split</BaseButton>
+            <BaseButton @click="calculateSession">Party Spliter</BaseButton>
         </div>
         </div>
 

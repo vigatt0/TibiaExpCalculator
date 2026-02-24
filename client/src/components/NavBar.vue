@@ -1,13 +1,22 @@
 <script setup>
-import { useAuthStore } from '../stores/auth'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue';
+import { useAuthStore } from '../stores/auth';
+import { useRouter } from 'vue-router';
 
-const auth = useAuthStore()
-const router = useRouter()
+const auth = useAuthStore();
+const router = useRouter();
+const activeTab = ref('exp-calculator');
 
 function logout() {
-  auth.logout()
-  router.push('/')
+  auth.logout();
+  router.push('/');
+}
+
+function navigateTo(tab) {
+  activeTab.value = tab;
+  if (tab === 'exp-calculator') router.push('/');
+  else if (tab === 'farm-goal') router.push('/farm');
+  else if (tab === 'party-hunt') router.push('/hunt-session');
 }
 </script>
 
@@ -18,7 +27,38 @@ function logout() {
         ⚔️ TibiaExp
       </router-link>
       <div class="flex items-center gap-4">
-        <router-link to="/" class="text-gray-300 hover:text-white text-sm">Calculator</router-link>
+        <div class="flex space-x-4">
+          <button
+            :class="{
+              'text-white border-b-2 border-emerald-400': activeTab === 'exp-calculator',
+              'text-gray-300 hover:text-white': activeTab !== 'exp-calculator'
+            }"
+            class="text-sm px-3 py-2"
+            @click="navigateTo('exp-calculator')"
+          >
+            Exp Calculator
+          </button>
+          <button
+            :class="{
+              'text-white border-b-2 border-emerald-400': activeTab === 'farm-goal',
+              'text-gray-300 hover:text-white': activeTab !== 'farm-goal'
+            }"
+            class="text-sm px-3 py-2"
+            @click="navigateTo('farm-goal')"
+          >
+            Farm Goal
+          </button>
+          <button
+            :class="{
+              'text-white border-b-2 border-emerald-400': activeTab === 'party-hunt',
+              'text-gray-300 hover:text-white': activeTab !== 'party-hunt'
+            }"
+            class="text-sm px-3 py-2"
+            @click="navigateTo('party-hunt')"
+          >
+            Party Hunt
+          </button>
+        </div>
         <template v-if="auth.isLoggedIn">
           <router-link to="/dashboard" class="text-gray-300 hover:text-white text-sm">Dashboard</router-link>
           <button @click="logout" class="text-sm text-gray-400 hover:text-white cursor-pointer">Logout</button>

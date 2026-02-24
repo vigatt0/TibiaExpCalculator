@@ -125,10 +125,22 @@ async function saveGoal() {
           <p class="text-xs text-gray-400">EXP per Day</p>
           <p class="text-lg font-mono font-bold text-blue-400">{{ formatNumber(result.expPerDay) }}</p>
         </div>
-        <div class="bg-gray-700 rounded p-3 sm:col-span-2">
-          <p class="text-xs text-gray-400">EXP per Hour ({{ form.hoursPerDay }}h/day)</p>
-          <p class="text-lg font-mono font-bold text-emerald-400">{{ formatNumber(result.expPerHour) }}</p>
+        <div class="bg-gray-700 rounded p-3">
+          <p class="text-xs text-gray-400">EXP per Hour (Green 150%)</p>
+          <p class="text-lg font-mono font-bold text-emerald-400">{{ formatNumber(result.greenExpPerHour) }}</p>
         </div>
+        <div class="bg-gray-700 rounded p-3">
+          <p class="text-xs text-gray-400">EXP per Hour (Orange 100%)</p>
+          <p class="text-lg font-mono font-bold text-orange-400">{{ formatNumber(result.orangeExpPerHour) }}</p>
+        </div>
+      </div>
+
+      <div class="mt-4 p-3 bg-gray-700/50 rounded text-sm text-gray-300">
+        <p>💡 <span class="font-bold">Hunting Strategy:</span></p>
+        <ul class="list-disc list-inside mt-1 space-y-1">
+          <li>Hunt for <span class="text-emerald-400 font-bold">{{ Math.min(form.hoursPerDay, 3) }}h</span> at <span class="font-mono">{{ formatNumber(result.greenExpPerHour) }}/h</span></li>
+          <li v-if="form.hoursPerDay > 3">Then hunt for <span class="text-orange-400 font-bold">{{ Number(form.hoursPerDay - 3).toFixed(1) }}h</span> at <span class="font-mono">{{ formatNumber(result.orangeExpPerHour) }}/h</span></li>
+        </ul>
       </div>
 
       <div v-if="auth.isLoggedIn" class="mt-4">

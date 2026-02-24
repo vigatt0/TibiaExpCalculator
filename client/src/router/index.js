@@ -7,6 +7,16 @@ const routes = [
     component: () => import('../views/CalculatorView.vue'),
   },
   {
+    path: '/farm',
+    name: 'FarmCalculator',
+    component: () => import('../views/FarmCalculatorView.vue'),
+  },
+  {
+    path: '/hunt-session',
+    name: 'HuntSession',
+    component: () => import('../views/HuntSessionView.vue'),
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('../views/LoginView.vue'),

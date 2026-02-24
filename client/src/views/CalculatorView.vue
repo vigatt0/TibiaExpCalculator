@@ -3,6 +3,7 @@ import { ref, reactive, computed } from 'vue'
 import { calculateExpGoal, formatNumber } from '../utils/expCalculator'
 import { useAuthStore } from '../stores/auth'
 import { useGoalStore } from '../stores/goals'
+import BaseButton from '../components/BaseButton.vue'
 
 const auth = useAuthStore()
 const goalStore = useGoalStore()
@@ -72,38 +73,37 @@ async function saveGoal() {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
           <label class="block text-sm text-gray-400 mb-1">Current Level</label>
-          <input v-model.number="form.currentLevel" type="number" min="1" placeholder="e.g. 500"
+          <input v-model.number="form.currentLevel" type="number" min="1" placeholder="500"
             class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-emerald-500" />
         </div>
         <div>
           <label class="block text-sm text-gray-400 mb-1">Target Level</label>
-          <input v-model.number="form.targetLevel" type="number" min="2" placeholder="e.g. 700"
+          <input v-model.number="form.targetLevel" type="number" min="2" placeholder="700"
             class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-emerald-500" />
         </div>
         <div>
           <label class="block text-sm text-gray-400 mb-1">Days to Reach Goal</label>
-          <input v-model.number="form.days" type="number" min="1" placeholder="e.g. 15"
+          <input v-model.number="form.days" type="number" min="1" placeholder="15"
             class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-emerald-500" />
         </div>
         <div>
           <label class="block text-sm text-gray-400 mb-1">Hours per Day</label>
-          <input v-model.number="form.hoursPerDay" type="number" min="0.1" max="24" step="0.5" placeholder="e.g. 3"
+          <input v-model.number="form.hoursPerDay" type="number" min="0.1" max="24" step="0.5" placeholder="3"
             class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-emerald-500" />
         </div>
       </div>
 
       <div v-if="auth.isLoggedIn" class="mb-4">
         <label class="block text-sm text-gray-400 mb-1">Character Name (optional)</label>
-        <input v-model="form.characterName" type="text" placeholder="e.g. My Knight"
+        <input v-model="form.characterName" type="text" placeholder="My Knight"
           class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-emerald-500" />
       </div>
 
       <p v-if="error" class="text-red-400 text-sm mb-3">{{ error }}</p>
 
-      <button @click="calculate"
-        class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2 rounded cursor-pointer transition">
+      <BaseButton @click="calculate">
         Calculate
-      </button>
+      </BaseButton>
     </div>
 
     <div v-if="result" class="bg-gray-800 rounded-lg p-6">
@@ -132,10 +132,9 @@ async function saveGoal() {
       </div>
 
       <div v-if="auth.isLoggedIn" class="mt-4">
-        <button @click="saveGoal"
-          class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 rounded cursor-pointer transition">
+        <BaseButton @click="saveGoal" variant="secondary">
           💾 Save Goal to Dashboard
-        </button>
+        </BaseButton>
         <p v-if="saveMsg" class="text-sm mt-2 text-center" :class="saveMsg.includes('saved') ? 'text-emerald-400' : 'text-red-400'">
           {{ saveMsg }}
         </p>

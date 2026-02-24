@@ -12,8 +12,8 @@ const goalLimiter = rateLimit({
   message: { error: 'Too many requests, please try again later.' },
 });
 
-router.use(auth);
 router.use(goalLimiter);
+router.use(auth);
 
 router.post(
   '/',

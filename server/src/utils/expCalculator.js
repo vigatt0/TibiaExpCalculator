@@ -27,7 +27,7 @@ function calculateExpGoal(currentLevel, targetLevel, days, hoursPerDay) {
     throw new Error('Days must be a positive number');
   }
   if (hoursPerDay <= 0 || hoursPerDay > 24) {
-    throw new Error('Hours per day must be between 0 and 24');
+    throw new Error('Hours per day must be greater than 0 and at most 24');
   }
 
   const currentExp = totalExpForLevel(currentLevel);

@@ -59,7 +59,7 @@ describe('calculateExpGoal', () => {
   });
 
   test('throws when hoursPerDay is invalid', () => {
-    expect(() => calculateExpGoal(100, 200, 10, 0)).toThrow('Hours per day must be between 0 and 24');
-    expect(() => calculateExpGoal(100, 200, 10, 25)).toThrow('Hours per day must be between 0 and 24');
+    expect(() => calculateExpGoal(100, 200, 10, 0)).toThrow('Hours per day must be greater than 0 and at most 24');
+    expect(() => calculateExpGoal(100, 200, 10, 25)).toThrow('Hours per day must be greater than 0 and at most 24');
   });
 });
